@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Come out?</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'samim';
+            src: url('font/Samim.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'samim';
+            src: url('font/Samim-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-dark: #281F59;
+            --purple-deep: #be069878;
+            --purple-mid: #7400ff;
+            --purple-light: #8B7CC7;
+            --lavender-soft: #C9C2E3;
+            --slate-accent: #3A3A52;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'samim', sans-serif !important;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 20% 20%, var(--purple-mid) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, var(--purple-deep) 0%, transparent 50%);
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* اورب‌های نورانی پس‌زمینه برای تقویت افکت شیشه‌ای */
+        .glow-orb-1, .glow-orb-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .glow-orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--purple-mid);
+            top: 15%;
+            left: 20%;
+        }
+        .glow-orb-2 {
+            width: 250px;
+            height: 250px;
+            background: var(--purple-light);
+            bottom: 15%;
+            right: 20%;
+        }
+
+        /* کارت شیشه‌ای اصلی (Glassmorphism Card) */
+        .glass-card {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 520px;
+            padding: 40px 30px;
+            background: rgba(42, 27, 77, 0.35);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(201, 194, 227, 0.18);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(14, 11, 29, 0.6),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .soal-container {
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        #soal {
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-shadow: 0 0 12px rgba(201, 194, 227, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .pasokh {
+            position: relative;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding-right: 170px;
+        }
+
+        /* استایل مشترک دکمه‌ها */
+        .btn-custom {
+            height: 52px;
+            padding: 0 32px;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+            outline: none;
+        }
+
+        /* دکمه YES */
+        #yes {
+            background: linear-gradient(135deg, var(--purple-light), var(--lavender-soft));
+            color: var(--bg-dark);
+            box-shadow: 0 4px 20px rgba(139, 124, 199, 0.4);
+            z-index: 2;
+        }
+
+        #yes:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(201, 194, 227, 0.6);
+        }
+
+        /* دکمه NO (دکمه فراری) */
+        #no {
+            position: absolute;
+            background: rgba(58, 58, 82, 0.8);
+            color: var(--lavender-soft);
+            border: 1px solid rgba(201, 194, 227, 0.2);
+            backdrop-filter: blur(4px);
+            z-index: 3;
+            transition: left 0.25s ease-out, top 0.25s ease-out, background 0.3s ease;
+        }
+
+        #no:hover {
+            background: rgba(90, 59, 140, 0.9);
+            box-shadow: 0 0 15px rgba(90, 59, 140, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- دایره‌های درخشان پس‌زمینه -->
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+
+    <!-- کارت شیشه‌ای -->
+    <div class="glass-card">
+        <div class="soal-container">
+            <h1 id="soal">😌 میتونم به یه قرار دعوتتون کنم؟</h1>
+        </div>
+        <div class="pasokh" id="pasokh-box">
+            <input id="yes" class="btn-custom" type="button" value="YES">
+            <input id="no" class="btn-custom" type="button" value="NO">
+        </div>
+    </div>
+
+    <script>
+        const soal = document.getElementById("soal");
+        const yes = document.getElementById("yes");
+        const no = document.getElementById("no");
+        const pasokhBox = document.getElementById("pasokh-box");
+        let tedad = 0;
+
+        // تنظیم موقعیت اولیه دکمه NO
+        function setInitialNoPosition() {
+            no.style.left = "calc(50% + 60px)";
+            no.style.top = "calc(50% - 26px)";
+        }
+        setInitialNoPosition();
+
+        function harekat() {
+            tedad += 1;
+
+            const parentRect = pasokhBox.getBoundingClientRect();
+            const noWidth = no.offsetWidth;
+            const noHeight = no.offsetHeight;
+
+            // محاسبه محدوده مجاز حرکت داخل منطقه پاسخ
+            const maxX = parentRect.width - noWidth;
+            const maxY = parentRect.height - noHeight;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            no.style.left = randomX + "px";
+            no.style.top = randomY + "px";
+
+            if (tedad >= 2 && tedad < 3) {
+                soal.textContent = "😒 اذیت نکن دیگه!";
+            } else if (tedad >= 3 && tedad < 5) {
+                soal.textContent = "😡 داری عصبیم میکنی!";
+            } else if (tedad >= 5) {
+                no.style.display = "none";
+                soal.textContent = "😏 دوباره میپرسم، میای بیرون؟";
+                yes.style.transform = "scale(1.30)";
+                pasokhBox.style.transition = "0.5s"
+                pasokhBox.style.paddingRight="0px"
+            }
+        }
+
+        yes.addEventListener("click", function () {
+            yes.disabled = true;
+            no.style.display = "none";
+            soal.textContent = "(; انتخاب خوبی بود!";
+
+            yes.style.transform = "scale(1.30)";
+            pasokhBox.style.transition = "0.5s"
+            pasokhBox.style.paddingRight="0px"
+            yes.style.background = "rgba(211, 0, 255, 0.91)"; //رنگ ارغوانی برای موفقیت
+            yes.style.color = "#ffffff";
+            yes.style.fontSize = "22px";
+            
+            let count = 5;
+            yes.value = count;
+
+            const timer = setInterval(() => {
+                count--;
+                if (count >= 0) {
+                    yes.value = count;
+                } else {
+                    clearInterval(timer);
+                    // window.location.href = "https://web.bale.ai/chat?uid=1889602121";
+                }
+            }, 1000);
+        });
+
+        no.addEventListener("mouseover", harekat);
+        no.addEventListener("click", harekat);
+    </script>
+</body>
+
+</html>
